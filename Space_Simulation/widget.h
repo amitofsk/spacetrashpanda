@@ -23,6 +23,7 @@ public:
     void drawTabs(QPainter &p);
     void drawSettings(QPainter &p);
     void drawSim(QPainter &p);
+    void drawISSView(QPainter &p);
     void paintEvent(QPaintEvent *e);
     void mousePressEvent(QMouseEvent *e);
     void MouseMoveEvent(QMouseEvent *e);
@@ -33,7 +34,8 @@ public:
     int height = 800;
 
     //tab 1 = sim
-    //tab 2 = settings
+    //tab 2 = ISS
+    //tab 3 = settings
     int currentTab = 1;
 
     ~Widget();
@@ -52,6 +54,7 @@ private:
 
     Buttons Simu;
     Buttons Setti;
+    Buttons ISS;
 
     Buttons Simul[3];
     std::vector<Buttons> settin;
