@@ -58,7 +58,9 @@ bool Buttons::getHov() {
     return hov;
 }
 
-
+void Buttons::setY(int Y) {
+    y = Y;
+}
 
 bool Buttons::isHovering(QMouseEvent *e) {
     Q_UNUSED(e);

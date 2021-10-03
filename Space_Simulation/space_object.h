@@ -12,13 +12,16 @@
 class Space_Object
 {
 public:
-    Space_Object(int widID);
+    Space_Object(int widID, int off);
     int getVelocity();
     int getDirection();
     int getMass();
     int getRad();
+    int getWidgetY();
+    int getwidID();
     bool getUse();
     bool getSatellite();
+    int getRisk();
 
     int isClicked(QMouseEvent *e);
 
@@ -26,8 +29,14 @@ public:
     void setDir(int dir);
     void setUse(bool u);
     void setRad(int radi);
-
+    void setMass(int mas);
+    void setWidgetY(int widy);
+    void setwidID(int widgID);
     void drawObjWidget(QPainter &p);
+    void setNew(int val, int k);
+    void setOff(int off);
+    void setRisk(int ri);
+
 
 private:
 
@@ -36,10 +45,14 @@ private:
     int direction;
     int mass;
     bool satellite;
-    bool use;
+    bool use = true;
     int radius;
     int widgetY;
     int widgID;
+
+    int offset;
+    int risk;
+
 
     Buttons Vel;
     Buttons Dir;

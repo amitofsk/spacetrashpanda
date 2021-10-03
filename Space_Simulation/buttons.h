@@ -29,6 +29,7 @@ public:
     bool getHov();
     void setHov();
     void setX(int X);
+    void setY(int Y);
 private:
      int x;
      int y;

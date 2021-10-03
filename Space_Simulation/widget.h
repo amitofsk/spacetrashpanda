@@ -8,11 +8,14 @@
 #include <iostream>
 #include <QMouseEvent>
 #include <vector>
-#include <QTabWidget>
+#include <QWheelEvent>
 #include <QTime>
 #include <QMessageBox>
+#include <math.h>
 #include "buttons.h"
 #include "space_object.h"
+
+#define PI 3.14159265
 
 class Widget : public QWidget
 {
@@ -28,12 +31,13 @@ public:
     void paintEvent(QPaintEvent *e);
     void mousePressEvent(QMouseEvent *e);
     void MouseMoveEvent(QMouseEvent *e);
+    void wheelEvent(QWheelEvent *e);
     void drawButton(QPainter &painter, Buttons button);
     void timerEvent(QTimerEvent *e);
-
+    void Calculations(int i);
     int width = 1000;
     int height = 800;
-
+    //tab 0 = Intro
     //tab 1 = sim
     //tab 2 = ISS
     //tab 3 = settings
@@ -44,30 +48,35 @@ public:
     ~Widget();
 private:
     QWidget* simulation_widget;
-    QTabWidget* settings_widget;
 
     QImage earth;
-    QImage iss;
+    QImage earth_Hor;
+    QImage iss2;
 
     Buttons play;
     Buttons skip_forw;
+    Buttons restart;
     Buttons skip_back;
-    Buttons display;
-    Buttons remove;
+
     Buttons add;
 
     Buttons Simu;
     Buttons Setti;
     Buttons ISS;
 
-    Buttons Simul[3];
-    std::vector<Buttons> settin;
-
     std::vector<Space_Object> debris;
 
     int timerId;
     const int DELAY = 100;
 
+    int scroll_offset;
 
+    bool playing = false;
+    bool dead = false;
+    int Frame;
+    int dangerFilter = 0;
+
+    int CalcRisk(int i);
+    void drawFilter(QPainter &p);
 };
 #endif // WIDGET_H
