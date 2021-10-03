@@ -72,9 +72,10 @@ void Widget::drawSim(QPainter &p){
 }
 
 void Widget::drawISSView(QPainter &p) {
-    QBrush brush(Qt::red);
+    QBrush brush(Qt::black);
     p.setBrush(brush);
     p.drawRect(0, 50, width-100, height);
+    p.drawImage(((width-100)/2)-iss.width()/2, (((height-10)/2)-iss.height()/2)+20, iss);
 }
 
 Widget::~Widget()
