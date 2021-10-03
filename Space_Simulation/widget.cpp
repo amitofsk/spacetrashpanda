@@ -10,15 +10,22 @@ Widget::Widget(QWidget *parent): QWidget(parent) {
     debris.push_back(Space_Object(0, scroll_offset));
     debris.push_back(Space_Object(1, scroll_offset));
 
-    Buttons button(0, 0, 100, 50, "Sim");
+    Buttons button(105, 0, 100, 50, "Sim");
     Simu = button;
     Simu.setColor(QColor(205, 205, 205));
-    Buttons buttone(210, 0, 100, 50, "Settings");
+    Buttons buttone(420, 0, 100, 50, "Settings");
     Setti = buttone;
     Setti.setColor(QColor(50, 50, 50));
-    Buttons buttonee(105, 0, 100, 50, "ISS View");
+    Buttons butt(0, 0, 100, 50, "About");
+    Info = butt;
+    Info.setColor(QColor(205, 205, 205));
+    Buttons buttonee(210, 0, 100, 50, "ISS View");
     ISS = buttonee;
     ISS.setColor(QColor(50, 50, 50));
+    Buttons butto(315, 0, 100, 50, "Risk");
+    Graphrisk = butto;
+    Graphrisk.setColor(QColor(50, 50, 50));
+
     Buttons buttoneee(400, 300, 200, 80, "Add Object");
     add = buttoneee;
 
@@ -54,16 +61,23 @@ void Widget::paintEvent(QPaintEvent *e)
         drawSettings(p);
     } else if(currentTab==2) {
         drawISSView(p);
+    } else if(currentTab==4) {
+        drawGraph(p);
+    } else if(currentTab==0) {
+        drawInfo(p);
     }
     drawTabs(p);
 }
 
 void Widget::drawTabs(QPainter &p) {
     p.setBrush(QBrush(Qt::gray));
+    p.setPen(QPen(Qt::gray));
     p.drawRect(0, 0, width, 50);
     Simu.drawButton(p, Simu);
     ISS.drawButton(p, ISS);
     Setti.drawButton(p, Setti);
+    Graphrisk.drawButton(p, Graphrisk);
+    Info.drawButton(p, Info);
 }
 
 void Widget::drawSettings(QPainter &p){
@@ -74,6 +88,46 @@ void Widget::drawSettings(QPainter &p){
      debris[i].drawObjWidget(p);
  }
  add.drawButton(p, add);
+}
+
+void Widget::drawInfo(QPainter &p) {
+    p.setPen(QPen(Qt::white));
+    p.setBrush(QBrush(Qt::black));
+    p.drawRect(0, 50, width, height);
+    QFont font("Courier", 15, QFont::DemiBold);
+    QFontMetrics fm(font);
+    p.setFont(font);
+    QString str = "Welcome to the Space Debris Simulator";
+    int textWidth = fm.horizontalAdvance(str);
+    p.drawText(width/2-textWidth/2, 90, str);
+    str = "This is not a real time simulator as it is in 2D.";
+    p.drawText(10, 150, str);
+    str = "This is because there are so many real-time space debris trackers.";
+    p.drawText(10, 200, str);
+    str = "We designed this with risk to space craft and human life in mind.";
+    p.drawText(10, 250, str);
+    str = "Which is why when you see the dots or \"debris\" changing color";
+    p.drawText(10, 300, str);
+    str = "within our Simulator you can see how the threat level increases as there is less time to manueaver.";
+    p.drawText(10, 350, str);
+    str = "We have also made a view to focus more on the satillite as it was our thinking";
+    p.drawText(10, 400, str);
+    str = "that nothing is more affected by space debris than working satillites and space stations";
+    p.drawText(10, 450, str);
+    str = "Also you will see a white bar in both simulation screens that is";
+    p.drawText(10, 500, str);
+    str = "a filter by threat level bar which maxes at 255 which is the max risk/threat.";
+    p.drawText(10, 550, str);
+    str = "So as you slide it up only the debris with the risk level or higher will be displayed";
+    p.drawText(10, 600, str);
+    str = "Lastly you will see a tab for a Graph which is something we thought would be";
+    p.drawText(10, 650, str);
+    str =  "nice to have as it would be much easier to see the risk to a craft by a certain object.";
+    p.drawText(10, 700, str);
+    str = "And of Course";
+    p.drawText(10, 750, str);
+    str = "Have fun with it :)";
+    p.drawText(width/2-textWidth/2, 780, str);
 }
 
 void Widget::drawSim(QPainter &p){
@@ -108,7 +162,27 @@ void Widget::drawSim(QPainter &p){
     QFont font("Courier", 15, QFont::DemiBold);
     QFontMetrics fm(font);
     p.setFont(font);
-    p.drawText(100, 100, str);
+    p.drawText(30, 100, str);
+}
+
+void Widget::drawGraph(QPainter &p) {
+    p.setBrush(QBrush(Qt::white));
+    p.drawRect(0, 0, 1000, 800);
+    p.setPen(QPen(Qt::black));
+    QFont font("Courier", 15, QFont::DemiBold);
+    QFontMetrics fm(font);
+    p.setFont(font);
+    for(int i = 19; i>-1; i--) {
+        p.drawLine(100, (19-i)*700/17, 900, (19-i)*700/17);
+        p.drawText(40, (19-i)*700/17+5, QString::number((255/17) * i));
+    }
+    for(int i = 0; i<21; i++) {
+        p.drawLine(i*800/20+100, 60, i*800/20+100, 760);
+        p.drawText(i*800/20+95, 780, QString::number(5*i));
+    }
+        p.setBrush(QBrush(Qt::red));
+        p.setPen(QPen(Qt::red,6));
+        p.drawLine(100, 700, 900, 90);
 }
 
 int Widget::CalcRisk(int i) {
@@ -157,7 +231,7 @@ void Widget::drawISSView(QPainter &p) {
     QString str = "Frame num: " + QString::number(Frame);
     QFont font("Courier", 15, QFont::DemiBold);
     p.setFont(font);
-    p.drawText(100, 100, str);
+    p.drawText(30, 100, str);
 }
 
 void Widget::Calculations(int i) {
@@ -174,7 +248,7 @@ void Widget::Calculations(int i) {
 
 void Widget::drawFilter(QPainter &p) {
     int y = 60;
-    int yer = 90;
+    int yer = 120;
     if(currentTab==1) {
       y = 740;
       yer= 710;
@@ -203,28 +277,53 @@ void Widget::timerEvent(QTimerEvent *e){
 void Widget::mousePressEvent(QMouseEvent *e) {
 
 
-    if((currentTab==1 || currentTab==2) && Setti.isClicked(e)) {
+    if((currentTab==1 || currentTab==2|| currentTab==4 || currentTab==0) && Setti.isClicked(e)) {
         currentTab = 3;
         Simu.setColor(QColor(50, 50, 50));
         ISS.setColor(QColor(50, 50, 50));
         Setti.setColor(QColor(205, 205, 205));
+        Graphrisk.setColor(QColor(50, 50, 50));
+        Info.setColor(QColor(50, 50, 50));
         playing = false;
         play.setString("Play");
-    } else if((currentTab==2 || currentTab==3) && Simu.isClicked(e)) {
+    } else if((currentTab==2 || currentTab==3 || currentTab==4|| currentTab==0) && Simu.isClicked(e)) {
         currentTab =1;
         Setti.setColor(QColor(50, 50, 50));
         ISS.setColor(QColor(50, 50, 50));
         Simu.setColor(QColor(205, 205, 205));
+        Graphrisk.setColor(QColor(50, 50, 50));
+        Info.setColor(QColor(50, 50, 50));
         playing = false;
         play.setString("Play");
-    } else if((currentTab==1 || currentTab==3) && ISS.isClicked(e)) {
+    } else if((currentTab==1 || currentTab==3 || currentTab==4 || currentTab==0) && ISS.isClicked(e)) {
         currentTab =2;
         Setti.setColor(QColor(50, 50, 50));
         Simu.setColor(QColor(50, 50, 50));
         ISS.setColor(QColor(205, 205, 205));
+        Graphrisk.setColor(QColor(50, 50, 50));
+        Info.setColor(QColor(50, 50, 50));
+        playing = false;
+        play.setString("Play");
+    } else if((currentTab==1 || currentTab==3 || currentTab==2 || currentTab==0) && Graphrisk.isClicked(e)) {
+        currentTab = 4;
+        Setti.setColor(QColor(50, 50, 50));
+        ISS.setColor(QColor(50, 50, 50));
+        Simu.setColor(QColor(50, 50, 50));
+        Graphrisk.setColor(QColor(205, 205, 205));
+        Info.setColor(QColor(50, 50, 50));
         playing = false;
         play.setString("Play");
     }
+    else if((currentTab==1 || currentTab==3 || currentTab==2 || currentTab==4) && Info.isClicked(e)) {
+            currentTab = 0;
+            Setti.setColor(QColor(50, 50, 50));
+            ISS.setColor(QColor(50, 50, 50));
+            Simu.setColor(QColor(50, 50, 50));
+            Info.setColor(QColor(205, 205, 205));
+            Graphrisk.setColor(QColor(50, 50, 50));
+            playing = false;
+            play.setString("Play");
+        }
     if(currentTab==3) {
         for(int i = 0; i<space_obj_count; i++) {
             int val = debris[i].isClicked(e);
@@ -361,6 +460,10 @@ void Widget::MouseMoveEvent(QMouseEvent *e) {
  } else if(currentTab==3) {
      Simu.isHovering(e);
      ISS.isHovering(e);
+ } else if(currentTab==4) {
+     ISS.isHovering(e);
+     Setti.isHovering(e);
+     Simu.isHovering(e);
  }
  repaint();
 }
