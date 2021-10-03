@@ -33,6 +33,7 @@ Widget::Widget(QWidget *parent): QWidget(parent) {
 
 void Widget::load_Images() {
     earth.load("../earth2");
+    iss.load("../iss");
 }
 
 void Widget::paintEvent(QPaintEvent *e)
