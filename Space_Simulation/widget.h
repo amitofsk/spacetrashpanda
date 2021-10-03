@@ -47,6 +47,7 @@ private:
     QTabWidget* settings_widget;
 
     QImage earth;
+    QImage iss;
 
     Buttons play;
     Buttons skip_forw;
