@@ -12,6 +12,7 @@
 #include <QTime>
 #include <QMessageBox>
 #include "buttons.h"
+#include "space_object.h"
 
 class Widget : public QWidget
 {
@@ -38,6 +39,8 @@ public:
     //tab 3 = settings
     int currentTab = 1;
 
+    int space_obj_count = 2;
+
     ~Widget();
 private:
     QWidget* simulation_widget;
@@ -58,6 +61,8 @@ private:
 
     Buttons Simul[3];
     std::vector<Buttons> settin;
+
+    std::vector<Space_Object> debris;
 
     int timerId;
     const int DELAY = 100;
