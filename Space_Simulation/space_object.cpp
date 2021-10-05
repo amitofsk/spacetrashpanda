@@ -1,3 +1,4 @@
+//Written by: Nikolas Pensyl
 #include "space_object.h"
 #include <QObject>
 
