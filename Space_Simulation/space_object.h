@@ -1,6 +1,6 @@
 #ifndef SPACE_OBJECT_H
 #define SPACE_OBJECT_H
-
+//Written by: Nikolas Pensyl
 #include "buttons.h"
 #include <QInputDialog>
 #include <string>
