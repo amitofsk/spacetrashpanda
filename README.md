@@ -1,6 +1,8 @@
 # spacetrashpanda
 Entry for Space Apps 2021
 
+All code was written by: Nikolas Pensyl
+
 Thanks for taking time to view our submission for the Space Apps 2021 challenge. 
 
 If you wish to directly run this program download the "build-Space_Simulation-Desktop_Qt_5_15_2_MinGW_64_bit-Release". After full download of the folder open it and your looking for the, "release" folder which has the executable. The executable will be name "Space_Simulation".
