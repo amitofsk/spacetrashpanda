@@ -1,6 +1,6 @@
 #ifndef BUTTONS_H
 #define BUTTONS_H
-
+//Written by: Nikolas Pensyl
 #include <QWidget>
 #include <QMouseEvent>
 #include <QTime>
