@@ -1,6 +1,6 @@
 #ifndef WIDGET_H
 #define WIDGET_H
-
+//Written by: Nikolas Pensyl
 #include <QWidget>
 #include <QWidget>
 #include <QPainter>
