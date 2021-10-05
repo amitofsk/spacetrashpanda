@@ -1,3 +1,4 @@
+//Written by: Nikolas Pensyl
 #include "widget.h"
 
 #include <QApplication>
