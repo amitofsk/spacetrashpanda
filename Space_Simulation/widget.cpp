@@ -1,3 +1,4 @@
+//Written by: Nikolas Pensyl
 #include "widget.h"
 
 Widget::Widget(QWidget *parent): QWidget(parent) {
